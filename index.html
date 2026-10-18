@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Heros Suite — Six Free, Private, Unlimited Browser Extensions</title>
+<meta name="description" content="Heros Suite: NoteBook, PDF, markClipper, Todo, Player and Markdown. Six free, private, unlimited browser extensions with one design language. 100% local, no cloud, no accounts.">
+<meta property="og:title" content="Heros Suite — Six Free, Private, Unlimited Browser Extensions">
+<meta property="og:description" content="Jupyter in the browser, local PDF editing, web clipping, a 150-tool study studio, a media remote and a Markdown studio. Free forever. Zero cloud.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%234285F4'/%3E%3Cstop offset='1' stop-color='%238A2BE2'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='22' fill='url(%23g)'/%3E%3Ctext x='50' y='68' font-size='52' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3EH%3C/text%3E%3C/svg%3E">
+<style>
+:root {
+  --bg: #07090f;
+  --bg2: #0b0f1a;
+  --card: #101625;
+  --card2: #141b2e;
+  --line: #1e2740;
+  --text: #e8ecf6;
+  --muted: #8b95ad;
+  --blue: #4285F4;
+  --violet: #8A2BE2;
+  --teal: #14B8A6;
+  --orange: #FF6F00;
+  --rose: #e35d5d;
+  --nb: #F37626;
+  --pdf: #e35d5d;
+  --mc: #14B8A6;
+  --td: #8A2BE2;
+  --pl: #FF4B4B;
+  --md: #4C8DFF;
+  --radius: 16px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+a { color: inherit; text-decoration: none; }
+
+.bg-orbs { position: fixed; inset: 0; z-index: -1; overflow: hidden; }
+.orb { position: absolute; border-radius: 50%; filter: blur(110px); opacity: .16; animation: drift 22s ease-in-out infinite alternate; }
+.orb.o1 { width: 520px; height: 520px; background: var(--blue); top: -160px; left: -120px; }
+.orb.o2 { width: 460px; height: 460px; background: var(--violet); top: 30%; right: -160px; animation-delay: -6s; }
+.orb.o3 { width: 420px; height: 420px; background: var(--teal); bottom: -140px; left: 22%; animation-delay: -12s; }
+@keyframes drift { from { transform: translateY(0) scale(1); } to { transform: translateY(60px) scale(1.12); } }
+
+nav {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(7, 9, 15, .78);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+}
+.nav-in { max-width: 1160px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 14px 22px; }
+.brand { display: flex; align-items: center; gap: 12px; font-weight: 700; letter-spacing: .4px; }
+.brand-mark {
+  width: 36px; height: 36px; border-radius: 10px; display: grid; place-items: center;
+  background: linear-gradient(135deg, var(--blue), var(--violet));
+  font-weight: 800; font-size: 20px; color: #fff;
+}
+.nav-links { display: flex; gap: 26px; font-size: 14.5px; color: var(--muted); }
+.nav-links a:hover { color: var(--text); }
+@media (max-width: 780px) { .nav-links { display: none; } }
+
+.wrap { max-width: 1160px; margin: 0 auto; padding: 0 22px; }
+
+.hero { text-align: center; padding: 96px 0 30px; }
+.kicker {
+  display: inline-block; font-size: 13px; letter-spacing: 2.5px; text-transform: uppercase;
+  color: var(--teal); border: 1px solid rgba(20,184,166,.35); border-radius: 100px;
+  padding: 7px 18px; margin-bottom: 26px; background: rgba(20,184,166,.07);
+}
+h1.title {
+  font-size: clamp(44px, 8vw, 86px); font-weight: 800; letter-spacing: -2px; line-height: 1.04;
+  background: linear-gradient(92deg, #4285F4 0%, #8A2BE2 32%, #14B8A6 62%, #FF6F00 100%);
+  background-size: 220% 100%;
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  animation: shimmer 7s linear infinite;
+}
+@keyframes shimmer { 0% { background-position: 0% 50%; } 100% { background-position: 220% 50%; } }
+.tagline { font-size: clamp(17px, 2.4vw, 21px); color: var(--muted); max-width: 760px; margin: 22px auto 0; }
+.tagline strong { color: var(--text); }
+
+.stats { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin: 42px 0 8px; }
+.stat {
+  background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+  padding: 16px 26px; min-width: 132px;
+}
+.stat b { display: block; font-size: 26px; background: linear-gradient(90deg, var(--blue), var(--teal)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.stat span { font-size: 12.5px; color: var(--muted); letter-spacing: .6px; text-transform: uppercase; }
+
+.cta { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 36px; }
+.btn {
+  padding: 13px 28px; border-radius: 12px; font-weight: 600; font-size: 15.5px;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn.primary { background: linear-gradient(92deg, var(--blue), var(--violet)); color: #fff; box-shadow: 0 10px 34px rgba(66,133,244,.32); }
+.btn.ghost { border: 1px solid var(--line); background: var(--card); color: var(--text); }
+
+.section { padding: 84px 0 12px; }
+.sec-head { text-align: center; margin-bottom: 46px; }
+.sec-head h2 { font-size: clamp(30px, 4.4vw, 44px); font-weight: 800; letter-spacing: -1px; }
+.sec-head p { color: var(--muted); margin-top: 12px; font-size: 17px; }
+
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); gap: 22px; }
+.card {
+  position: relative; background: linear-gradient(180deg, var(--card), var(--bg2));
+  border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 28px 26px 24px; overflow: hidden;
+  transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease;
+}
+.card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--accent, var(--blue)); opacity: .9; }
+.card:hover { transform: translateY(-6px); border-color: var(--accent, var(--blue)); box-shadow: 0 22px 50px rgba(0,0,0,.45); }
+.card-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+.icon {
+  width: 48px; height: 48px; border-radius: 13px; display: grid; place-items: center;
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+}
+.icon svg { width: 25px; height: 25px; stroke: var(--accent); fill: none; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+.card h3 { font-size: 20px; letter-spacing: -.3px; }
+.ver {
+  font-size: 11.5px; color: var(--accent); border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+  padding: 2px 9px; border-radius: 100px; margin-left: auto; white-space: nowrap;
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+.card-tag { color: var(--muted); font-size: 14.8px; margin-bottom: 16px; }
+.card ul { list-style: none; margin-bottom: 20px; }
+.card li { font-size: 14px; color: #b9c2d8; padding: 4.5px 0 4.5px 22px; position: relative; }
+.card li::before { content: ""; position: absolute; left: 2px; top: 12px; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); opacity: .85; }
+.card-links { display: flex; gap: 10px; font-size: 13.5px; font-weight: 600; }
+.card-links a { padding: 8px 16px; border-radius: 10px; border: 1px solid var(--line); transition: all .18s ease; }
+.card-links a.fill { background: var(--accent); border-color: var(--accent); color: #060a12; }
+.card-links a:hover { transform: translateY(-1.5px); }
+
+.why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
+.why {
+  background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 22px;
+  transition: border-color .2s ease, transform .2s ease;
+}
+.why:hover { border-color: var(--blue); transform: translateY(-3px); }
+.why svg { width: 26px; height: 26px; stroke: var(--teal); fill: none; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; margin-bottom: 14px; }
+.why h4 { font-size: 16.5px; margin-bottom: 6px; }
+.why p { font-size: 14px; color: var(--muted); }
+
+.pipe {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 10px;
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 26px 20px; margin-top: 8px;
+}
+.pipe .node {
+  padding: 10px 18px; border-radius: 11px; font-size: 14px; font-weight: 600;
+  border: 1px solid var(--line); background: var(--bg2); white-space: nowrap;
+}
+.pipe .node.c-blue { border-color: var(--blue); color: var(--blue); }
+.pipe .node.c-teal { border-color: var(--teal); color: var(--teal); }
+.pipe .node.c-violet { border-color: var(--violet); color: var(--violet); }
+.pipe .node.c-orange { border-color: var(--orange); color: var(--orange); }
+.pipe .node.c-rose { border-color: var(--rose); color: var(--rose); }
+.pipe .node.c-nb { border-color: var(--nb); color: var(--nb); }
+.pipe .arrow { color: var(--muted); font-size: 17px; }
+.pipe-note { text-align: center; color: var(--muted); font-size: 13.5px; margin-top: 14px; }
+.pipe-note code { background: var(--card); border: 1px solid var(--line); padding: 2px 8px; border-radius: 7px; color: var(--teal); font-size: 12.5px; }
+
+.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 18px; counter-reset: step; }
+.step {
+  position: relative; background: var(--card); border: 1px solid var(--line);
+  border-radius: 14px; padding: 26px 22px 22px;
+}
+.step::before {
+  counter-increment: step; content: counter(step, decimal-leading-zero);
+  position: absolute; top: -13px; left: 20px;
+  background: linear-gradient(92deg, var(--blue), var(--violet));
+  color: #fff; font-size: 12.5px; font-weight: 700; padding: 4px 12px; border-radius: 100px;
+}
+.step h4 { margin-bottom: 8px; font-size: 16px; }
+.step p { font-size: 14px; color: var(--muted); }
+.step code { color: var(--teal); font-size: 12.5px; background: var(--bg2); border: 1px solid var(--line); padding: 1.5px 7px; border-radius: 6px; }
+
+.table-shell { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); }
+table { width: 100%; border-collapse: collapse; font-size: 14.5px; min-width: 620px; }
+th, td { padding: 13px 18px; text-align: left; border-bottom: 1px solid var(--line); }
+th { background: var(--card2); font-size: 13px; letter-spacing: .8px; text-transform: uppercase; color: var(--muted); }
+tr:last-child td { border-bottom: none; }
+td.yes { color: var(--teal); font-weight: 700; }
+td.no { color: #5b6478; }
+
+.road { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
+.phase { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
+.phase h4 { font-size: 15px; color: var(--muted); text-transform: uppercase; letter-spacing: 1.4px; margin-bottom: 12px; }
+.phase ul { list-style: none; }
+.phase li { padding: 6px 0 6px 20px; position: relative; font-size: 14.3px; color: #b9c2d8; }
+.phase li::before { content: ""; position: absolute; left: 0; top: 13px; width: 8px; height: 8px; border-radius: 50%; background: var(--accent, var(--blue)); }
+.phase.done li::before { background: var(--teal); }
+.phase.next li::before { background: var(--orange); }
+
+footer {
+  margin-top: 96px; border-top: 1px solid var(--line);
+  background: linear-gradient(180deg, transparent, rgba(66,133,244,.05));
+}
+.foot-in { max-width: 1160px; margin: 0 auto; padding: 44px 22px 60px; text-align: center; }
+.foot-links { display: flex; gap: 22px; justify-content: center; flex-wrap: wrap; margin-bottom: 22px; font-size: 14.5px; color: var(--muted); }
+.foot-links a:hover { color: var(--text); }
+.foot-sub { color: #5b6478; font-size: 13.5px; }
+
+.reveal { opacity: 0; transform: translateY(26px); transition: opacity .65s ease, transform .65s ease; }
+.reveal.in { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<div class="bg-orbs">
+  <div class="orb o1"></div>
+  <div class="orb o2"></div>
+  <div class="orb o3"></div>
+</div>
+
+<nav>
+  <div class="nav-in">
+    <div class="brand"><span class="brand-mark">H</span> Heros Suite</div>
+    <div class="nav-links">
+      <a href="#extensions">Extensions</a>
+      <a href="#why">Why Heros</a>
+      <a href="#install">Install</a>
+      <a href="#compare">Compare</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="https://github.com/Ahmedbakr78/Heros_Suite" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+</nav>
+
+<header class="wrap hero">
+  <span class="kicker">Chromium MV3 &middot; Free forever &middot; 100% local</span>
+  <h1 class="title">HEROS<br>SUITE</h1>
+  <p class="tagline">Six free, private, unlimited browser extensions with <strong>one design language</strong>. Jupyter in the browser, local PDF editing, web clipping, a 150-tool study studio, a media remote and a Markdown studio. <strong>No accounts. No cloud. No limits.</strong></p>
+  <div class="stats">
+    <div class="stat"><b>6</b><span>Extensions</span></div>
+    <div class="stat"><b>420+</b><span>Built-in tools</span></div>
+    <div class="stat"><b>100%</b><span>Local processing</span></div>
+    <div class="stat"><b>0</b><span>Accounts needed</span></div>
+    <div class="stat"><b>0</b><span>Data uploaded</span></div>
+  </div>
+  <div class="cta">
+    <a class="btn primary" href="#extensions">Explore the Suite</a>
+    <a class="btn ghost" href="https://github.com/Ahmedbakr78/Heros_Suite" target="_blank" rel="noopener">View on GitHub</a>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="section reveal" id="extensions">
+    <div class="sec-head">
+      <h2>The Suite</h2>
+      <p>Every tool you reach for daily — rebuilt as one coherent family. Click through to each extension's site and repository.</p>
+    </div>
+    <div class="grid">
+
+      <div class="card reveal" style="--accent: var(--nb)">
+        <div class="card-top">
+          <div class="icon"><svg viewBox="0 0 24 24"><path d="M4 19.5V6a2 2 0 0 1 2-2h13v16H6.5A2.5 2.5 0 0 1 4 17.5z"/><path d="M8 8h7"/><path d="M8 12h7"/></svg></div>
+          <h3>Heros NoteBook</h3>
+          <span class="ver">v1.1.0</span>
+        </div>
+        <p class="card-tag">Open, read, run, edit and export Jupyter <code>.ipynb</code> notebooks with a real Python runtime in your browser.</p>
+        <ul>
+          <li>Real Python execution via Pyodide WebAssembly sandbox</li>
+          <li>Builder Studio, variable inspector, search and outline</li>
+          <li>160 tools, full export engine, works offline</li>
+        </ul>
+        <div class="card-links">
+          <a class="fill" href="https://ahmedbakr78.github.io/Heros_Jupter/" target="_blank" rel="noopener">Open Studio</a>
+          <a href="https://github.com/Ahmedbakr78/Heros_Jupter" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+
+      <div class="card reveal" style="--accent: var(--pdf)">
+        <div class="card-top">
+          <div class="icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 15l2 2 4-4"/></svg></div>
+          <h3>Heros PDF</h3>
+          <span class="ver">v2.3.2</span>
+        </div>
+        <p class="card-tag">A fast, private PDF viewer and editor that lives in your browser. Read, mark up and edit locally.</p>
+        <ul>
+          <li>Annotate, highlight, merge, split, rotate, watermark</li>
+          <li>Full-text search with match navigation</li>
+          <li>Dark + light themes, 100% local pipeline</li>
+        </ul>
+        <div class="card-links">
+          <a class="fill" href="https://ahmedbakr78.github.io/Heros_PDF/" target="_blank" rel="noopener">Open Studio</a>
+          <a href="https://github.com/Ahmedbakr78/Heros_PDF" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+
+      <div class="card reveal" style="--accent: var(--mc)">
+        <div class="card-top">
+          <div class="icon"><svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4L8.12 15.88"/><path d="M14.47 14.48L20 20"/><path d="M8.12 8.12L12 12"/></svg></div>
+          <h3>markClipper</h3>
+          <span class="ver">v1.1.0</span>
+        </div>
+        <p class="card-tag">Markdown web clipper and Photo Lab. Save webpages, selections and photo galleries to perfect notes.</p>
+        <ul>
+          <li>Six capture modes: article, selection, bookmark, screenshot, gallery, bulk</li>
+          <li>Readability + Turndown pipeline with clean frontmatter</li>
+          <li>Photo Lab up to 250-photo galleries, local library</li>
+        </ul>
+        <div class="card-links">
+          <a class="fill" href="https://ahmedbakr78.github.io/Heros_Note/" target="_blank" rel="noopener">Open Studio</a>
+          <a href="https://github.com/Ahmedbakr78/Heros_Note" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+
+      <div class="card reveal" style="--accent: var(--td)">
+        <div class="card-top">
+          <div class="icon"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+          <h3>Heros Todo</h3>
+          <span class="ver">v2.2.0</span>
+        </div>
+        <p class="card-tag">Markdown, PDF and LaTeX panel studio with 150+ tools for studying, writing and organizing everything.</p>
+        <ul>
+          <li>Multi-workspaces across any folders of MD, TXT, TEX, PDF</li>
+          <li>Flashcards, quizzes, Anki export, pomodoro, habits</li>
+          <li>LaTeX math, diagrams, markers, builder studio</li>
+        </ul>
+        <div class="card-links">
+          <a class="fill" href="https://ahmedbakr78.github.io/Heros_Todo/" target="_blank" rel="noopener">Open Studio</a>
+          <a href="https://github.com/Ahmedbakr78/Heros_Todo" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+
+      <div class="card reveal" style="--accent: var(--pl)">
+        <div class="card-top">
+          <div class="icon"><svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
+          <h3>Heros Player</h3>
+          <span class="ver">v1.3.0</span>
+        </div>
+        <p class="card-tag">A full remote for YouTube Music, YouTube, Spotify and any media tab — right from the side panel.</p>
+        <ul>
+          <li>Live song readout: title, artist, artwork, progress</li>
+          <li>Seek, volume, shuffle, repeat, likes on every service</li>
+          <li>Probe + act engines with freshness polling</li>
+        </ul>
+        <div class="card-links">
+          <a class="fill" href="https://ahmedbakr78.github.io/Heros_Music_Player/" target="_blank" rel="noopener">Open Remote</a>
+          <a href="https://github.com/Ahmedbakr78/Heros_Music_Player" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+
+      <div class="card reveal" style="--accent: var(--md)">
+        <div class="card-top">
+          <div class="icon"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 15V9l3 3 3-3v6"/><path d="M16 9v6"/><path d="M14 13l2 2 2-2"/></svg></div>
+          <h3>Heros Markdown</h3>
+          <span class="ver">v1.2.0</span>
+        </div>
+        <p class="card-tag">Free, private, unlimited Markdown studio: perfect rendering, offline KaTeX, every Mermaid diagram.</p>
+        <ul>
+          <li>Offline math and all Mermaid diagram types, rendered locally</li>
+          <li>All languages and full RTL support</li>
+          <li>110 tools: markers, flashcards, quizzes, habits, stopwatch</li>
+        </ul>
+        <div class="card-links">
+          <a class="fill" href="https://ahmedbakr78.github.io/heros-markdown/" target="_blank" rel="noopener">Open Studio</a>
+          <a href="https://github.com/Ahmedbakr78/heros-markdown" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section reveal" id="why">
+    <div class="sec-head">
+      <h2>Why Heros</h2>
+      <p>Privacy is structural here, not a setting. The suite is built so your data never leaves the machine.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why reveal">
+        <svg viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg>
+        <h4>100% local</h4>
+        <p>Every engine — math, diagrams, PDF editing, notebook execution — runs in your browser sandbox. Nothing is uploaded.</p>
+      </div>
+      <div class="why reveal">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+        <h4>Free forever</h4>
+        <p>No subscriptions, no premium tiers, no trials. Every feature, every tool, every release — free with nothing to unlock.</p>
+      </div>
+      <div class="why reveal">
+        <svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M8 9h8"/><path d="M8 13h5"/></svg>
+        <h4>Unlimited</h4>
+        <p>No file caps, no note limits, no daily quotas, no locked exports. Use as much as you want, forever.</p>
+      </div>
+      <div class="why reveal">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg>
+        <h4>No accounts</h4>
+        <p>Nothing to sign up for, nothing to sign in to, nothing to leak. Open the panel and work.</p>
+      </div>
+      <div class="why reveal">
+        <svg viewBox="0 0 24 24"><path d="M12 3v18"/><path d="M5 8l7-5 7 5"/><path d="M5 16l7 5 7-5"/></svg>
+        <h4>One design language</h4>
+        <p>Panel-first layout, dark and light themes, keyboard-first controls and the same storage model across all six.</p>
+      </div>
+      <div class="why reveal">
+        <svg viewBox="0 0 24 24"><path d="M8 3v4"/><path d="M16 3v4"/><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M3 11h18"/></svg>
+        <h4>Works offline</h4>
+        <p>Disconnect entirely. The suite keeps rendering, editing, executing and exporting without a network.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section reveal">
+    <div class="sec-head">
+      <h2>One Flow, Six Tools</h2>
+      <p>Clip, refine, study, export — the extensions chain together like one product.</p>
+    </div>
+    <div class="pipe reveal">
+      <span class="node c-teal">markClipper</span><span class="arrow">&rarr;</span>
+      <span class="node c-blue">Heros Markdown</span><span class="arrow">&rarr;</span>
+      <span class="node c-violet">Heros Todo</span><span class="arrow">&rarr;</span>
+      <span class="node c-rose">Heros PDF</span>
+      <span class="arrow">&nbsp;&middot;&nbsp;</span>
+      <span class="node c-nb">Heros NoteBook</span>
+      <span class="arrow">&nbsp;&middot;&nbsp;</span>
+      <span class="node c-orange">Heros Player</span>
+    </div>
+    <p class="pipe-note">Everything stays on your disk. Exports are open formats — <code>.md</code> <code>.pdf</code> <code>.ipynb</code> <code>.zip</code> <code>.json</code></p>
+  </section>
+
+  <section class="section reveal" id="install">
+    <div class="sec-head">
+      <h2>Install in 30 Seconds</h2>
+      <p>Clone, load unpacked, done. Zips for one-click installs ship in every repository's releases.</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <h4>Get the code</h4>
+        <p>Clone or download any extension repository from the links above.</p>
+      </div>
+      <div class="step reveal">
+        <h4>Open extensions page</h4>
+        <p>Chrome <code>chrome://extensions</code> &middot; Edge <code>edge://extensions</code> &middot; Brave <code>brave://extensions</code></p>
+      </div>
+      <div class="step reveal">
+        <h4>Developer mode on</h4>
+        <p>Flip the Developer mode switch in the top corner.</p>
+      </div>
+      <div class="step reveal">
+        <h4>Load unpacked</h4>
+        <p>Select the extension folder inside the repository and pin it.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section reveal" id="compare">
+    <div class="sec-head">
+      <h2>Suite vs the Cloud</h2>
+      <p>What "local-first" actually means for your workflow.</p>
+    </div>
+    <div class="table-shell reveal">
+      <table>
+        <thead>
+          <tr><th>Capability</th><th>Heros Suite</th><th>Typical cloud tool</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Price</td><td class="yes">Free forever</td><td class="no">Subscription</td></tr>
+          <tr><td>Accounts</td><td class="yes">None</td><td class="no">Required</td></tr>
+          <tr><td>File limits</td><td class="yes">Unlimited</td><td class="no">Tiered</td></tr>
+          <tr><td>Data location</td><td class="yes">Your machine</td><td class="no">Their servers</td></tr>
+          <tr><td>Works offline</td><td class="yes">Yes</td><td class="no">No</td></tr>
+          <tr><td>Tracking</td><td class="yes">None</td><td class="no">Analytics</td></tr>
+          <tr><td>Export paywall</td><td class="yes">Never</td><td class="no">Common</td></tr>
+          <tr><td>Open source</td><td class="yes">MIT</td><td class="no">Usually not</td></tr>
+          <tr><td>Side panel native</td><td class="yes">All six</td><td class="no">Rarely</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section reveal" id="roadmap">
+    <div class="sec-head">
+      <h2>Roadmap</h2>
+      <p>Where the suite is going next.</p>
+    </div>
+    <div class="road">
+      <div class="phase done reveal">
+        <h4>Shipped</h4>
+        <ul>
+          <li>Six extensions, one design language</li>
+          <li>Real Python via Pyodide in NoteBook</li>
+          <li>150+ tools in Todo, 110 in Markdown</li>
+          <li>Suite hub and unified website</li>
+        </ul>
+      </div>
+      <div class="phase reveal">
+        <h4>In Progress</h4>
+        <ul>
+          <li>Chrome Web Store listings</li>
+          <li>Edge Add-ons listings</li>
+          <li>Accessibility audit pass</li>
+        </ul>
+      </div>
+      <div class="phase next reveal">
+        <h4>Next</h4>
+        <ul>
+          <li>Firefox port of all six</li>
+          <li>Shared suite settings panel</li>
+          <li>Localization expansion</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="foot-in">
+    <div class="foot-links">
+      <a href="https://github.com/Ahmedbakr78/Heros_Suite" target="_blank" rel="noopener">Suite Repository</a>
+      <a href="https://github.com/Ahmedbakr78?tab=repositories" target="_blank" rel="noopener">All Repositories</a>
+      <a href="https://ahmed-abo-bakr.pages.dev/" target="_blank" rel="noopener">Portfolio</a>
+      <a href="https://github.com/Ahmedbakr78/Heros_Suite/issues" target="_blank" rel="noopener">Issues</a>
+    </div>
+    <p class="foot-sub">2026 Ahmed Abo Bakr &middot; Heros Suite &middot; MIT License &middot; Free forever, private forever.</p>
+  </div>
+</footer>
+
+<script>
+const io = new IntersectionObserver((entries) => {
+  for (const e of entries) {
+    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  }
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+</script>
+
+</body>
+</html>
